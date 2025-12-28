@@ -127,3 +127,25 @@ Why is this needed in nano-modal?
 User defined functions can have any arguements passed to the function. We need to extract them without fail to ensure the function runs as programmed by the user.
 We can package the arguements as bytestream and send them to the worker
 
+# tests
+
+completed writing a simple test function to test serialize and deserialization
+
+
+# step 0.3
+Step 0.3: app.py
+
+App class with name parameter
+functions dict to store registered functions
+function() decorator method
+Wrap function in Function object
+Return wrapped function
+
+the goal of this task must be: 
+```python 
+@app.function()
+def fxn(x):
+    return x*2
+```
+
+create this structure so that the syntax works
