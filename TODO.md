@@ -71,16 +71,16 @@ nano-modal/
 
 ### Step 0.1: Environment Setup
 - [x] Install dependencies: `pip install -e ".[dev]"`
-- [ ] Start Redis: `docker run -d -p 6379:6379 redis:7-alpine`
-- [ ] Verify Docker: `docker run --rm python:3.11-slim python -c "print('works')"`
+- [x] Start Redis: `docker run -d -p 6379:6379 redis:7-alpine`
+- [x] Verify Docker: `docker run --rm python:3.11-slim python -c "print('works')"`
 
 ---
 
 ### Step 0.2: `serialize.py`
-- [ ] Import cloudpickle
-- [ ] `serialize_function(fn)` -> bytes
-- [ ] `serialize_args(args, kwargs)` -> bytes
-- [ ] `deserialize(data)` -> object
+- [x] Import cloudpickle
+- [x] `serialize_function(fn)` -> bytes
+- [x] `serialize_args(args, kwargs)` -> bytes
+- [x] `deserialize(data)` -> object
 - [ ] Add tests
 
 ---
