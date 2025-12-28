@@ -1,4 +1,4 @@
-# 🚀 Nano Modal
+# Nano Modal
 
 A minimal serverless platform for running Python functions in containers.
 
