@@ -149,3 +149,30 @@ def fxn(x):
 ```
 
 create this structure so that the syntax works
+
+# grpc 
+
+grpc is like the "contract" between the server and the client
+
+# Proto file
+
+this file tells the protocol buffers that we are using the version 3 of the syntax
+
+- declare the service with 2 RPC methods : invoke and getresult 
+invoke = sends a function to execute and gets back task id 
+getresult = asks for result using that task ID
+
+invoke = invoke request and invoke response ( get back task ID ) 
+
+getresult = getresultrequest and getresultresponse
+
+What This Defines:
+
+NanoModal service - the API your server will implement
+Invoke RPC - client sends function to execute
+GetResult RPC - client asks for result
+Messages - the data structures for communication
+Key Concepts:
+bytes - for your cloudpickle serialized data
+string - for task IDs and error messages
+rpc - remote procedure call (function call over network)

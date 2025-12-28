@@ -1,13 +1,13 @@
 class Function:
-    def __init__(self,func):
+    def __init__(self, func):
         self.func = func
 
-    def local(self,*args,**kwargs):
-        return self.func(*args,**kwargs)
+    def local(self, *args, **kwargs):
+        return self.func(*args, **kwargs)
 
-    def __call__(self,*args,**kwargs):
-        return self.local(*args,**kwargs)
+    def __call__(self, *args, **kwargs):
+        return self.local(*args, **kwargs)
 
-    def remote(self,*args,**kwargs):
-        #stub
+    def remote(self, *args, **kwargs):
+        # stub
         pass
