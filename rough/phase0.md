@@ -106,4 +106,24 @@ docker container stats
 
 ## cloudpickle
 
-This is similar to pickle library, but works for closures, functions and decorators. 
+This is similar to pickle library, but works for lambdas, closures, functions and decorators. 
+
+.dumps() to serialize the data - use cloudpickle for serializing 
+.load() to deserialize the data - use cloudpickle for deserializing
+
+### *args and **kwargs in python - super common but often confused by people 
+>small recap:
+
+- It allows functions to accept any number of arguements.
+    - args = Positional Arguements
+        function(1,2,3) , here the (1,2,3) is converted to a tuple when passed as *args
+        the variables are bundleled as a tuple, inside the function args becomes (1,2,3)
+ 
+    - kwargs = Keywords Arguements
+        take all the named arguements and bundle them as a dictionary named kwargs 
+        function(a=1,b="hello"), then kwargs becomes {'a': 1, 'b': 'hello'}.
+
+Why is this needed in nano-modal? 
+User defined functions can have any arguements passed to the function. We need to extract them without fail to ensure the function runs as programmed by the user.
+We can package the arguements as bytestream and send them to the worker
+
