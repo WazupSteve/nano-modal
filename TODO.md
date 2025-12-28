@@ -70,7 +70,7 @@ nano-modal/
 **Goal:** `square.remote(5)` returns `25`
 
 ### Step 0.1: Environment Setup
-- [ ] Install dependencies: `pip install -e ".[dev]"`
+- [x] Install dependencies: `pip install -e ".[dev]"`
 - [ ] Start Redis: `docker run -d -p 6379:6379 redis:7-alpine`
 - [ ] Verify Docker: `docker run --rm python:3.11-slim python -c "print('works')"`
 
