@@ -86,76 +86,76 @@ nano-modal/
 ---
 
 ### Step 0.3: `app.py`
-- [ ] `App` class with `name` parameter
-- [ ] `functions` dict to store registered functions
-- [ ] `function()` decorator method
-- [ ] Wrap function in `Function` object
-- [ ] Return wrapped function
+- [x] `App` class with `name` parameter
+- [x] `functions` dict to store registered functions
+- [x] `function()` decorator method
+- [x] Wrap function in `Function` object
+- [x] Return wrapped function
 
 ---
 
 ### Step 0.4: `function.py`
-- [ ] `Function` class
-- [ ] Store original function and options
-- [ ] `local(*args, **kwargs)` - direct execution
-- [ ] `__call__` - defaults to local
-- [ ] `remote(*args, **kwargs)` - calls server
-- [ ] Stub `map(inputs)` for Phase 2
+- [x] `Function` class
+- [x] Store original function and options
+- [x] `local(*args, **kwargs)` - direct execution
+- [x] `__call__` - defaults to local
+- [x] `remote(*args, **kwargs)` - calls server
+- [x] Stub `map(inputs)` for Phase 2
 
 ---
 
 ### Step 0.5: `proto/nano_modal.proto`
-- [ ] Define `NanoModal` service
-- [ ] `Invoke` RPC
-- [ ] `GetResult` RPC
-- [ ] `InvokeRequest` message
-- [ ] `InvokeResponse` message
-- [ ] `GetResultRequest` message
-- [ ] `GetResultResponse` message
-- [ ] Generate stubs with protoc
+- [x] Define `NanoModal` service
+- [x] `Invoke` RPC
+- [x] `GetResult` RPC
+- [x] `InvokeRequest` message
+- [x] `InvokeResponse` message
+- [x] `GetResultRequest` message
+- [x] `GetResultResponse` message
+- [x] Generate stubs with protoc
 
 ---
 
 ### Step 0.6: `client.py`
-- [ ] Import grpc and generated stubs
-- [ ] `get_channel()` - returns gRPC channel
-- [ ] `invoke(fn_bytes, args_bytes)` -> result_bytes
-- [ ] Handle connection errors
-- [ ] Add timeout handling
+- [x] Import grpc and generated stubs
+- [x] `get_channel()` - returns gRPC channel
+- [x] `invoke(fn_bytes, args_bytes)` -> result_bytes
+- [x] Handle connection errors
+- [x] Add timeout handling
 
 ---
 
 ### Step 0.7: `config.py`
-- [ ] Read server address from env var
-- [ ] `get_server_address()` -> str
-- [ ] `get_redis_url()` -> str
+- [x] Read server address from env var
+- [x] `get_server_address()` -> str
+- [x] `get_redis_url()` -> str
 
 ---
 
 ### Step 0.8: `server/service.py`
-- [ ] Import grpc and stubs
-- [ ] `NanoModalServicer` class
-- [ ] `Invoke()` - execute directly (no queue yet)
-- [ ] `GetResult()` - return result from storage
-- [ ] In-memory dict for results (Redis later)
+- [x] Import grpc and stubs
+- [x] `NanoModalServicer` class
+- [x] `Invoke()` - execute directly (no queue yet)
+- [x] `GetResult()` - return result from storage
+- [x] In-memory dict for results (Redis later)
 
 ---
 
 ### Step 0.9: `server/main.py`
-- [ ] Create gRPC server
-- [ ] Add servicer
-- [ ] Bind to port 50051
-- [ ] Start and wait
+- [x] Create gRPC server
+- [x] Add servicer
+- [x] Bind to port 50051
+- [x] Start and wait
 
 ---
 
 ### Step 0.10: `worker/docker_runner.py`
-- [ ] Import docker SDK
-- [ ] `execute_in_docker(fn_bytes, args_bytes)` -> result_bytes
-- [ ] Encode bytes as base64
-- [ ] Generate Python code for container
-- [ ] Add sandbox flags (--network none, --memory, etc)
-- [ ] Parse output and return result
+- [x] Import docker SDK
+- [x] `execute_in_docker(fn_bytes, args_bytes)` -> result_bytes
+- [x] Encode bytes as base64
+- [x] Generate Python code for container
+- [x] Add sandbox flags (--network none, --memory, etc)
+- [x] Parse output and return result
 
 ---
 
