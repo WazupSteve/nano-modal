@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+service NanoModal {
+    rpc Invoke(InvokeRequest) returns (InvokeResponse);
+    rpc GetResult(GetResultRequest) returns (GetResultResponse);
+}
+
+message InvokeRequest {
+    bytes function_pickle = 1;
+    bytes args_pickle = 2;
+}
+
+message InvokeResponse {
+    string task_id = 1;
+}
+
+message GetResultRequest {
+    string task_id = 1;
+}
+
+message GetResultResponse {
+    bytes result_pickle = 1;
+    string error = 2;
+}

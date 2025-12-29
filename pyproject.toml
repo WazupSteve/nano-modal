@@ -11,6 +11,7 @@ dependencies = [
     "docker>=7.0.0",
     "redis>=5.0.0",
     "click>=8.1.0",
+    "pytest>=9.0.2",
 ]
 
 [project.optional-dependencies]
@@ -37,4 +38,7 @@ target-version = ["py311"]
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.lint]
 select = ["E", "F", "I"]
+
