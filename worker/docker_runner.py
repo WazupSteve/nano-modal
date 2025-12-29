@@ -15,30 +15,22 @@ def execute_in_docker(fn_bytes, args_bytes):
     # create docker client
     client = docker.from_env()
     python_code = f"""
-    import cloudpickle
-    import base64
+import base64
+import subprocess
+import sys
 
-    # Decode function and arguments
-    fn = cloudpickle.loads(base64.b64decode('{fn_b64}'))
-    args, kwargs = cloudpickle.loads(base64.b64decode('{args_b64}'))
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "cloudpickle"])
 
-    # Execute function
-    result = fn(*args, **kwargs)
+import cloudpickle
 
-    # Encode and print result
-    print(base64.b64encode(cloudpickle.dumps(result)).decode())
-    """
+fn = cloudpickle.loads(base64.b64decode('{fn_b64}'))
+args, kwargs = cloudpickle.loads(base64.b64decode('{args_b64}'))
+result = fn(*args, **kwargs)
+print(base64.b64encode(cloudpickle.dumps(result)).decode())
+"""
 
     result = client.containers.run(
-        "python:3.11-slim",
-        command=["python", "-c", python_code],
-        remove=True,
-        network_mode="none",
-        mem_limit="512m",
-        cpu_period=100000,
-        cpu_quota=100000,  # CPU quota (1 core)
-        read_only=True,
-        user="nobody",
+        "python:3.11-slim", command=["python", "-c", python_code], remove=True
     )
 
     # decode the result back to bytes from string

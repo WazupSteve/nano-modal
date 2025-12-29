@@ -25,7 +25,7 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
         try:
             from worker.docker_runner import execute_in_docker
 
-            result_bytes = execute_in_docker(request.function_pickle, request.args_bytes)
+            result_bytes = execute_in_docker(request.function_pickle, request.args_pickle)
             self.results[task_id] = result_bytes
         except Exception:
             self.results[task_id] = None

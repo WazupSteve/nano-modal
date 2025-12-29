@@ -20,7 +20,7 @@ def get_channel(server_address=None):
     return grpc.insecure_channel(server_address)
 
 
-def invoke(fxn_bytes, args_bytes, server_address=None, timeout=30):
+def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
     """
     send function to server for execution and return for result
     return : cloudpickled result

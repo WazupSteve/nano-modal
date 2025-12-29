@@ -1,3 +1,4 @@
+import nano_modal
 from nano_modal.serialize import deserialize, serialize_args, serialize_function
 
 
@@ -23,3 +24,13 @@ def test_serial_deserial_workflow():
     result = fxn_new(*args_new, **kwargs_new)
 
     assert result == compute(4, 3)
+
+
+def test_remote_square():
+    app = nano_modal.App("test")
+
+    @app.function()
+    def square(x):
+        return x * x
+
+    assert square.remote(5) == 25
