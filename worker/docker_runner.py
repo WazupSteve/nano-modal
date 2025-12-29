@@ -14,7 +14,7 @@ def execute_in_docker(fn_bytes, args_bytes):
 
     # create docker client
     client = docker.from_env()
-    
+
     # Python code to run inside container
     # First install cloudpickle, then execute the function
     python_code = f"""

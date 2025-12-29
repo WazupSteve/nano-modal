@@ -1,5 +1,5 @@
-from .serialize import serialize_function, serialize_args, deserialize
 from .client import invoke
+from .serialize import deserialize, serialize_args, serialize_function
 
 
 class Function:
@@ -17,9 +17,9 @@ class Function:
         # Serialize function and arguments
         fn_bytes = serialize_function(self.func)
         args_bytes = serialize_args(*args, **kwargs)
-        
+
         # Call server and get result
         result_bytes = invoke(fn_bytes, args_bytes)
-        
+
         # Deserialize and return result
         return deserialize(result_bytes)
