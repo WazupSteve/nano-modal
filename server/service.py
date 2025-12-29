@@ -7,7 +7,6 @@ Servicer file:
 
 import uuid
 
-from nano_modal.serialize import deserialize, serialize_function
 from proto import nano_modal_pb2, nano_modal_pb2_grpc
 
 
@@ -23,13 +22,10 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
 
     def Invoke(self, request, context):
         task_id = str(uuid.uuid4())  # generate unique id
-        # deserialize
-        func = deserialize(request.function_pickle)
-        args, kwargs = deserialize(request.args_pickle)
-        # execute function
         try:
-            result = func(*args, **kwargs)
-            result_bytes = serialize_function(result)
+            from worker.docker_runner import execute_in_docker
+
+            result_bytes = execute_in_docker(request.function_pickle, request.args_bytes)
             self.results[task_id] = result_bytes
         except Exception:
             self.results[task_id] = None
