@@ -160,8 +160,8 @@ nano-modal/
 ---
 
 ### Step 0.11: Test Ping Pong
-- [ ] Start server: `python -m server.main`
-- [ ] Run test: `square.remote(5)` should return `25`
+- [x] Start server: `python -m server.main`
+- [x] Run test: `square.remote(5)` should return `25`
 
 ---
 
