@@ -29,7 +29,6 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
             self.results[task_id] = result_bytes
         except Exception:
             self.results[task_id] = None
-            # just storing error for now
 
         # return task id
         return nano_modal_pb2.InvokeResponse(task_id=task_id)

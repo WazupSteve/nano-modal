@@ -9,17 +9,11 @@ app = App("test")
 
 @app.function()
 def square(x):
-    return x * x
+    return x**2
 
 
 if __name__ == "__main__":
     # Test local execution first
     print(f"Local: square(5) = {square.local(5)}")
-
-    # Test remote execution (requires server running)
-    try:
-        result = square.remote(5)
-        print(f"Remote: square.remote(5) = {result}")
-    except Exception as e:
-        print(f"Remote failed: {e}")
-        print("Make sure the server is running: python -m server.main")
+    result = square.remote(5)
+    print(f"Remote: square.remote(5) = {result}")
