@@ -81,7 +81,7 @@ nano-modal/
 - [x] `serialize_function(fn)` -> bytes
 - [x] `serialize_args(args, kwargs)` -> bytes
 - [x] `deserialize(data)` -> object
-- [ ] Add tests
+- [x] Add tests
 
 ---
 
