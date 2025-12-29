@@ -18,9 +18,8 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
     context = gRPC connection metadata
     """
 
-    def __init__(self, task_id):
+    def __init__(self):
         self.results = {}  # task_id -> result_bytes
-        self.task_id = task_id
 
     def Invoke(self, request, context):
         task_id = str(uuid.uuid4())  # generate unique id
