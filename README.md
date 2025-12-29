@@ -1,6 +1,6 @@
 # Nano Modal
 
-![alt text](<ChatGPT Image Dec 29, 2025, 06_46_15 PM.png>)
+![Logo](<Logo.png>)
 
 A minimal serverless platform for running Python functions in containers.
 
