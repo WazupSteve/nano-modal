@@ -29,7 +29,7 @@ print(results)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 ## Installation
 
 ```bash
-pip install -e ".[dev]"
+uv pip install -e ".[dev]"
 ```
 
 ## Development
@@ -39,13 +39,13 @@ pip install -e ".[dev]"
 docker run -d -p 6379:6379 redis:7-alpine
 
 # Start server
-python -m server.main
+uv run -m server.main
 
 # Start worker (in another terminal)
-python -m worker.main
+uv run -m worker.main
 
 # Run an example
-python examples/hello.py
+uv run examples/hello.py
 ```
 
 ## Documentation
