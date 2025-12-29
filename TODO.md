@@ -168,7 +168,7 @@ nano-modal/
 ## Phase 1: Redis Queue
 
 ### Step 1.1: `server/queue.py`
-- [ ] Connect to Redis
+- [x] Connect to Redis
 - [ ] `enqueue_task(task_id, fn_bytes, args_bytes)`
 - [ ] `dequeue_task()` -> task
 - [ ] `store_result(task_id, result)`
