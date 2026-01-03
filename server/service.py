@@ -1,8 +1,5 @@
 """
 Servicer file:
-1) Receive function request from client
-2) Execute them directly ( todo : redis integration )
-3) Store and return result
 """
 
 from proto import nano_modal_pb2, nano_modal_pb2_grpc
