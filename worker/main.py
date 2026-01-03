@@ -16,5 +16,12 @@ def main():
     logging.basicConfig(level=logging.INFO)
     signal.signal(signal.SIGINT, handle_signal)
     signal.signal(signal.SIGTERM, handle_signal)
-    while not shutdown:
-        run_executor()
+
+    def should_stop():
+        return shutdown
+
+    run_executor(should_stop=should_stop)
+
+
+if __name__ == "__main__":
+    main()

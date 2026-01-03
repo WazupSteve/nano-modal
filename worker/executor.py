@@ -24,13 +24,13 @@ def process_task(task):
         store_result(task_id, str(exc).encode())
 
 
-def run_executor(poll_interval=1):
+def run_executor(poll_interval=1, should_stop=lambda: False):
     """
     timeout=5 on brpop : redis blocks upto 5 seconds
     if nothing arrives, we sleep "poll_interval" seconds
     """
     logging.info("worker executor has started")
-    while True:
+    while not should_stop():
         task = dequeue_task(timeout=5)
         if task is None:
             time.sleep(poll_interval)  # temporary limit set

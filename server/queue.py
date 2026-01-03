@@ -24,7 +24,6 @@ def enqueue_task(fn_bytes, args_bytes):
     redis list for task queue
     client -> server -> redis queue
     """
-
     task_id = str(uuid.uuid4())
 
     task = {"task_id": task_id, "fn_bytes": fn_bytes.hex(), "args_bytes": args_bytes.hex()}

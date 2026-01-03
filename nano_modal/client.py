@@ -5,6 +5,8 @@ Client code : gRPC client
 3)Wait for result
 """
 
+import time
+
 import grpc
 
 from proto import nano_modal_pb2, nano_modal_pb2_grpc
@@ -37,18 +39,28 @@ def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
         request = nano_modal_pb2.InvokeRequest(function_pickle=fxn_bytes, args_pickle=args_bytes)
         response = stub.Invoke(request, timeout=timeout)
 
-        # step2 : get result
-        result_request = nano_modal_pb2.GetResultRequest(task_id=response.task_id)
-        result_response = stub.GetResult(result_request, timeout=timeout)
+        # step2 : get result (with polling)
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                raise Exception("Task timed out")
 
-        # server returns error
-        if result_response.error:
-            raise Exception(f"server error:{result_response.error}")
-        return result_response.result_pickle
+            result_request = nano_modal_pb2.GetResultRequest(task_id=response.task_id)
+            # short timeout for individual gRPC call
+            result_response = stub.GetResult(result_request, timeout=10)
+
+            # server returns error
+            if result_response.error:
+                if result_response.error == "result pending":
+                    time.sleep(0.5)  # Wait before polling again
+                    continue
+                raise Exception(f"server error: {result_response.error}")
+
+            return result_response.result_pickle
 
     # server is down: grpc error
     except grpc.RpcError as e:
-        raise Exception(f"gRPC error:{e}")
+        raise Exception(f"gRPC error: {e}")
     # closing the channel
     finally:
         channel.close()

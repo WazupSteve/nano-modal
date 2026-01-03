@@ -169,32 +169,32 @@ nano-modal/
 
 ### Step 1.1: `server/queue.py`
 - [x] Connect to Redis
-- [ ] `enqueue_task(task_id, fn_bytes, args_bytes)`
-- [ ] `dequeue_task()` -> task
-- [ ] `store_result(task_id, result)`
-- [ ] `get_result(task_id)` -> result
+- [x] `enqueue_task(task_id, fn_bytes, args_bytes)`
+- [x] `dequeue_task()` -> task
+- [x] `store_result(task_id, result)`
+- [x] `get_result(task_id)` -> result
 
 ---
 
 ### Step 1.2: Update `server/service.py`
-- [ ] Replace direct execution with queue push
-- [ ] Return immediately after queuing
-- [ ] `GetResult` reads from Redis
+- [x] Replace direct execution with queue push
+- [x] Return immediately after queuing
+- [x] `GetResult` reads from Redis
 
 ---
 
 ### Step 1.3: `worker/executor.py`
-- [ ] Main loop: poll queue
-- [ ] Dequeue task
-- [ ] Call `docker_runner.execute_in_docker()`
-- [ ] Store result in Redis
-- [ ] Handle errors gracefully
+- [x] Main loop: poll queue
+- [x] Dequeue task
+- [x] Call `docker_runner.execute_in_docker()`
+- [x] Store result in Redis
+- [x] Handle errors gracefully
 
 ---
 
 ### Step 1.4: `worker/main.py`
-- [ ] Start executor loop
-- [ ] Add graceful shutdown
+- [x] Start executor loop
+- [x] Add graceful shutdown
 
 ---
 
