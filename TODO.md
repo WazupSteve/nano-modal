@@ -201,7 +201,7 @@ nano-modal/
 ## Phase 2: Parallel `.map()`
 
 ### Step 2.1: Update `function.py`
-- [ ] `map(inputs)` generator
+- [x] `map(inputs)` generator
 - [ ] Submit multiple tasks
 - [ ] Collect results in order
 - [ ] Yield results as they complete
