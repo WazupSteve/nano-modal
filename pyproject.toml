@@ -12,6 +12,7 @@ dependencies = [
     "redis>=5.0.0",
     "click>=8.1.0",
     "pytest>=9.0.2",
+    "dotenv>=0.9.9",
 ]
 
 [project.optional-dependencies]
