@@ -20,7 +20,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x16proto/nano_modal.proto"=\n\rInvokeRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x13\n\x0b\x61rgs_pickle\x18\x02 \x01(\x0c"!\n\x0eInvokeResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t"#\n\x10GetResultRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t"9\n\x11GetResultResponse\x12\x15\n\rresult_pickle\x18\x01 \x01(\x0c\x12\r\n\x05\x65rror\x18\x02 \x01(\t2j\n\tNanoModal\x12)\n\x06Invoke\x12\x0e.InvokeRequest\x1a\x0f.InvokeResponse\x12\x32\n\tGetResult\x12\x11.GetResultRequest\x1a\x12.GetResultResponseb\x06proto3'
+    b'\n\x16proto/nano_modal.proto"=\n\rInvokeRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x13\n\x0b\x61rgs_pickle\x18\x02 \x01(\x0c"!\n\x0eInvokeResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t"B\n\x11InvokeManyRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x14\n\x0c\x61rgs_pickles\x18\x02 \x03(\x0c"&\n\x12InvokeManyResponse\x12\x10\n\x08task_ids\x18\x01 \x03(\t"#\n\x10GetResultRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t"9\n\x11GetResultResponse\x12\x15\n\rresult_pickle\x18\x01 \x01(\x0c\x12\r\n\x05\x65rror\x18\x02 \x01(\t2\xa1\x01\n\tNanoModal\x12)\n\x06Invoke\x12\x0e.InvokeRequest\x1a\x0f.InvokeResponse\x12\x32\n\tGetResult\x12\x11.GetResultRequest\x1a\x12.GetResultResponse\x12\x35\n\nInvokeMany\x12\x12.InvokeManyRequest\x1a\x13.InvokeManyResponseb\x06proto3'
 )
 
 _globals = globals()
@@ -32,10 +32,14 @@ if not _descriptor._USE_C_DESCRIPTORS:
     _globals["_INVOKEREQUEST"]._serialized_end = 87
     _globals["_INVOKERESPONSE"]._serialized_start = 89
     _globals["_INVOKERESPONSE"]._serialized_end = 122
-    _globals["_GETRESULTREQUEST"]._serialized_start = 124
-    _globals["_GETRESULTREQUEST"]._serialized_end = 159
-    _globals["_GETRESULTRESPONSE"]._serialized_start = 161
-    _globals["_GETRESULTRESPONSE"]._serialized_end = 218
-    _globals["_NANOMODAL"]._serialized_start = 220
-    _globals["_NANOMODAL"]._serialized_end = 326
+    _globals["_INVOKEMANYREQUEST"]._serialized_start = 124
+    _globals["_INVOKEMANYREQUEST"]._serialized_end = 190
+    _globals["_INVOKEMANYRESPONSE"]._serialized_start = 192
+    _globals["_INVOKEMANYRESPONSE"]._serialized_end = 230
+    _globals["_GETRESULTREQUEST"]._serialized_start = 232
+    _globals["_GETRESULTREQUEST"]._serialized_end = 267
+    _globals["_GETRESULTRESPONSE"]._serialized_start = 269
+    _globals["_GETRESULTRESPONSE"]._serialized_end = 326
+    _globals["_NANOMODAL"]._serialized_start = 329
+    _globals["_NANOMODAL"]._serialized_end = 490
 # @@protoc_insertion_point(module_scope)

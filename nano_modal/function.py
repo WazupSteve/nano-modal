@@ -1,4 +1,4 @@
-from .client import invoke
+from .client import invoke, invoke_many, wait_for_result
 from .serialize import deserialize, serialize_args, serialize_function
 
 
@@ -23,3 +23,16 @@ class Function:
 
         # Deserialize and return result
         return deserialize(result_bytes)
+
+    def map(self, inputs):
+        """execute fxn in parallel over list of inputs"""
+        # serialize function once
+        fn_bytes = serialize_function(self.func)
+        # serialize every item in input list
+        args_pickles = [serialize_args(i) for i in inputs]
+        # call our new client function
+        task_ids = invoke_many(fn_bytes, args_pickles)
+
+        for tid in task_ids:
+            result_bytes = wait_for_result(tid)
+            yield deserialize(result_bytes)

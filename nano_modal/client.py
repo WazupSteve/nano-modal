@@ -64,3 +64,43 @@ def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
     # closing the channel
     finally:
         channel.close()
+
+
+def wait_for_result(task_id, server_address=None, timeout=120):
+    """Goal: Poll the server until a specific task_id has a result."""
+    if server_address is None:
+        server_address = get_server_address()
+    channel = get_channel(server_address)
+    stub = nano_modal_pb2_grpc.NanoModalStub(channel)
+
+    try:
+        start_time = time.time()
+        while True:
+            if time.time() - start_time > timeout:
+                raise Exception("Task timed out")
+            result_request = nano_modal_pb2.GetResultRequest(task_id=task_id)
+            result_response = stub.GetResult(result_request, timeout=10)
+            if result_response.error:
+                if result_response.error == "result pending":
+                    time.sleep(0.5)  # Wait before asking again
+                    continue
+                raise Exception(f"server error: {result_response.error}")
+            return result_response.result_pickle
+    finally:
+        channel.close()
+
+
+def invoke_many(fn_bytes, args_pickles, server_address=None):
+    """goal: send multiple args to server at once"""
+    if server_address is None:
+        server_address = get_server_address()
+    channel = get_channel(server_address)
+    stub = nano_modal_pb2_grpc.NanoModalStub(channel)
+    try:
+        request = nano_modal_pb2.InvokeManyRequest(
+            function_pickle=fn_bytes, args_pickles=args_pickles
+        )
+        response = stub.InvokeMany(request)
+        return response.task_ids
+    finally:
+        channel.close()

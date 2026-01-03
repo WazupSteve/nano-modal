@@ -17,6 +17,13 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
         task_id = enqueue_task(request.function_pickle, request.args_pickle)
         return nano_modal_pb2.InvokeResponse(task_id=task_id)
 
+    def InvokeMany(self, request, context):
+        task_ids = []  # list
+        for args_bytes in request.args_pickles:
+            tid = enqueue_task(request.function_pickle, args_bytes)
+            task_ids.append(tid)
+        return nano_modal_pb2.InvokeManyResponse(task_ids=task_ids)
+
     def GetResult(self, request, context):
         task_id = request.task_id
         result_bytes = get_result(task_id)

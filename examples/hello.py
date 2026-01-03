@@ -11,9 +11,11 @@ app = App("test")
 def square(x):
     return x**2
 
+
 @app.function()
-def print_name(name:str):
+def print_name(name: str):
     return f"Ronaldo is : {name}"
+
 
 if __name__ == "__main__":
     # Test local execution first
@@ -21,6 +23,5 @@ if __name__ == "__main__":
     result = square.remote(5)
     print(f"Remote: square.remote(5) = {result}")
     print(f"Local: Name = {print_name.local('goat')}")
-    result = print_name.remote('goat')
+    result = print_name.remote("goat")
     print(f"Remote: Name  = {result}")
-
