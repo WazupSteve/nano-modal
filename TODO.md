@@ -163,7 +163,7 @@
 ## Phase 3: Dependencies & Images
 
 ### Step 3.1: `image.py`
-- [ ] `Image` class
+- [x] `Image` class
 - [ ] `python(version)` class method
 - [ ] `pip_install(*packages)` method
 - [ ] `run_commands(*cmds)` method
