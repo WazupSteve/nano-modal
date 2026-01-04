@@ -18,17 +18,16 @@ def execute_in_docker(
     commands = image_config.get("commands", [])
 
     all_packages = ["cloudpickle"] + list(pip_packages)
-    packages_str = " ".join(all_packages)
 
     # setup commands
-    setup_section = " "
+    setup_section = ""
     if commands:
         setup_section = "\n".join([f"import os; os.system({repr(cmd)})" for cmd in commands])
         setup_section += "\n"
 
     python_code = f"""{setup_section}import subprocess
 import sys
-subprocess.run([sys.executable, "-m", "pip", "install", {repr(packages_str).replace("'", '"')}],
+subprocess.run([sys.executable, "-m", "pip", "install"] + {repr(all_packages)},
                 check=True, 
                 capture_output=True)
 import cloudpickle
