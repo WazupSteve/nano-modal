@@ -22,7 +22,7 @@ def get_channel(server_address=None):
     return grpc.insecure_channel(server_address)
 
 
-def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
+def invoke(fxn_bytes, args_bytes, image_config=None, server_address=None, timeout=120):
     """
     send function to server for execution and return for result
     return : cloudpickled result
@@ -35,8 +35,19 @@ def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
 
     # handling errors
     try:
+        # Step 0: prepare image config
+        img_msg = None
+        if image_config:
+            img_msg = nano_modal_pb2.ImageConfig(
+                base_image=image_config.get("base_image"),
+                pip_packages=image_config.get("pip_packages"),
+                commands=image_config.get("commands"),
+            )
+
         # step1: send fxn to execute
-        request = nano_modal_pb2.InvokeRequest(function_pickle=fxn_bytes, args_pickle=args_bytes)
+        request = nano_modal_pb2.InvokeRequest(
+            function_pickle=fxn_bytes, args_pickle=args_bytes, image_config=img_msg
+        )
         response = stub.Invoke(request, timeout=timeout)
 
         # step2 : get result (with polling)
@@ -66,7 +77,7 @@ def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
         channel.close()
 
 
-def invoke_many_stream(fn_bytes, args_pickles, server_address=None, timeout=120):
+def invoke_many_stream(fn_bytes, args_pickles, image_config=None, server_address=None, timeout=120):
     """
     goal: send multiple tasks and receive streaming results
     returns : generateor that yields (index,result_bytes) tuples as they arrive
@@ -77,8 +88,17 @@ def invoke_many_stream(fn_bytes, args_pickles, server_address=None, timeout=120)
     stub = nano_modal_pb2_grpc.NanoModalStub(channel)
 
     try:
+        # Step 0: prepare image config
+        img_msg = None
+        if image_config:
+            img_msg = nano_modal_pb2.ImageConfig(
+                base_image=image_config.get("base_image"),
+                pip_packages=image_config.get("pip_packages"),
+                commands=image_config.get("commands"),
+            )
+
         request = nano_modal_pb2.InvokeManyRequest(
-            function_pickle=fn_bytes, args_pickles=args_pickles
+            function_pickle=fn_bytes, args_pickles=args_pickles, image_config=img_msg
         )
         # returns an iterator over StreamResult message
         response_stream = stub.InvokeManyStream(request, timeout=timeout)
@@ -117,15 +137,24 @@ def wait_for_result(task_id, server_address=None, timeout=120):
         channel.close()
 
 
-def invoke_many(fn_bytes, args_pickles, server_address=None):
+def invoke_many(fn_bytes, args_pickles, image_config=None, server_address=None):
     """goal: send multiple args to server at once"""
     if server_address is None:
         server_address = get_server_address()
     channel = get_channel(server_address)
     stub = nano_modal_pb2_grpc.NanoModalStub(channel)
     try:
+        # Step 0: prepare image config
+        img_msg = None
+        if image_config:
+            img_msg = nano_modal_pb2.ImageConfig(
+                base_image=image_config.get("base_image"),
+                pip_packages=image_config.get("pip_packages"),
+                commands=image_config.get("commands"),
+            )
+
         request = nano_modal_pb2.InvokeManyRequest(
-            function_pickle=fn_bytes, args_pickles=args_pickles
+            function_pickle=fn_bytes, args_pickles=args_pickles, image_config=img_msg
         )
         response = stub.InvokeMany(request)
         return response.task_ids
