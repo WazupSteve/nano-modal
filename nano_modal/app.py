@@ -14,9 +14,9 @@ class App:
         self.name = name
         self.functions = {}
 
-    def function(self):
+    def function(self, image=None):
         def decorator(func):
-            wrapped = Function(func)
+            wrapped = Function(func, image=image)
             self.functions[func.__name__] = wrapped
             return wrapped
 

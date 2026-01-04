@@ -3,8 +3,9 @@ from .serialize import deserialize, serialize_args, serialize_function
 
 
 class Function:
-    def __init__(self, func):
+    def __init__(self, func, image=None):
         self.func = func
+        self.image = image
 
     def local(self, *args, **kwargs):
         return self.func(*args, **kwargs)
@@ -18,8 +19,12 @@ class Function:
         fn_bytes = serialize_function(self.func)
         args_bytes = serialize_args(*args, **kwargs)
 
+        image_config = None
+        if self.image:
+            image_config = self.image.to_dict()
+
         # Call server and get result
-        result_bytes = invoke(fn_bytes, args_bytes)
+        result_bytes = invoke(fn_bytes, args_bytes, image_config)
 
         # Deserialize and return result
         return deserialize(result_bytes)
@@ -35,18 +40,27 @@ class Function:
         """
         fn_bytes = serialize_function(self.func)
         args_pickles = [serialize_args(i) for i in inputs]
+
+        image_config = None
+        if self.image:
+            image_config = self.image.to_dict()
+
         num_inputs = len(args_pickles)
 
         if not ordered:
             # Yield immediately as results arrive (out of order)
-            for index, result_bytes, error in invoke_many_stream(fn_bytes, args_pickles):
+            for index, result_bytes, error in invoke_many_stream(
+                fn_bytes, args_pickles, image_config
+            ):
                 if error:
                     raise Exception(f"Task {index} failed: {error}")
                 yield deserialize(result_bytes)
         else:
             # Collect all, then yield in order
             results = [None] * num_inputs
-            for index, result_bytes, error in invoke_many_stream(fn_bytes, args_pickles):
+            for index, result_bytes, error in invoke_many_stream(
+                fn_bytes, args_pickles, image_config
+            ):
                 if error:
                     raise Exception(f"Task {index} failed: {error}")
                 results[index] = deserialize(result_bytes)

@@ -163,18 +163,18 @@
 ## Phase 3: Dependencies & Images
 
 ### Step 3.1: `image.py`
-- [ ] `Image` class
-- [ ] `python(version)` class method
-- [ ] `pip_install(*packages)` method
-- [ ] `run_commands(*cmds)` method
-- [ ] Store config as proto message
+- [x] `Image` class
+- [x] `python(version)` class method
+- [x] `pip_install(*packages)` method
+- [x] `run_commands(*cmds)` method
+- [x] Store config as proto message
 
 ---
 
 ### Step 3.2: Update `docker_runner.py`
-- [ ] Accept image config
-- [ ] Install pip packages at container start
-- [ ] Run commands before function
+- [x] Accept image config
+- [x] Install pip packages at container start
+- [x] Run commands before function
 
 ---
 

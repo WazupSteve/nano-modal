@@ -7,9 +7,16 @@ service NanoModal {
     rpc InvokeManyStream(InvokeManyRequest) returns (stream StreamResult);
 }
 
+message ImageConfig {
+    string base_image = 1;
+    repeated string pip_packages = 2;
+    repeated string commands = 3;
+}
+
 message InvokeRequest {
     bytes function_pickle = 1;
     bytes args_pickle = 2;
+    ImageConfig image_config = 3;
 }
 
 message InvokeResponse {
@@ -19,6 +26,7 @@ message InvokeResponse {
 message InvokeManyRequest {
     bytes function_pickle = 1;
     repeated bytes args_pickles = 2;
+    ImageConfig image_config = 3;
 }
 
 message InvokeManyResponse {

@@ -20,7 +20,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x16proto/nano_modal.proto"=\n\rInvokeRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x13\n\x0b\x61rgs_pickle\x18\x02 \x01(\x0c"!\n\x0eInvokeResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t"B\n\x11InvokeManyRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x14\n\x0c\x61rgs_pickles\x18\x02 \x03(\x0c"&\n\x12InvokeManyResponse\x12\x10\n\x08task_ids\x18\x01 \x03(\t"C\n\x0cStreamResult\x12\r\n\x05index\x18\x01 \x01(\x05\x12\x15\n\rresult_pickle\x18\x02 \x01(\x0c\x12\r\n\x05\x65rror\x18\x03 \x01(\t"#\n\x10GetResultRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t"9\n\x11GetResultResponse\x12\x15\n\rresult_pickle\x18\x01 \x01(\x0c\x12\r\n\x05\x65rror\x18\x02 \x01(\t2\xda\x01\n\tNanoModal\x12)\n\x06Invoke\x12\x0e.InvokeRequest\x1a\x0f.InvokeResponse\x12\x32\n\tGetResult\x12\x11.GetResultRequest\x1a\x12.GetResultResponse\x12\x35\n\nInvokeMany\x12\x12.InvokeManyRequest\x1a\x13.InvokeManyResponse\x12\x37\n\x10InvokeManyStream\x12\x12.InvokeManyRequest\x1a\r.StreamResult0\x01\x62\x06proto3'
+    b'\n\x16proto/nano_modal.proto"I\n\x0bImageConfig\x12\x12\n\nbase_image\x18\x01 \x01(\t\x12\x14\n\x0cpip_packages\x18\x02 \x03(\t\x12\x10\n\x08\x63ommands\x18\x03 \x03(\t"a\n\rInvokeRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x13\n\x0b\x61rgs_pickle\x18\x02 \x01(\x0c\x12"\n\x0cimage_config\x18\x03 \x01(\x0b\x32\x0c.ImageConfig"!\n\x0eInvokeResponse\x12\x0f\n\x07task_id\x18\x01 \x01(\t"f\n\x11InvokeManyRequest\x12\x17\n\x0f\x66unction_pickle\x18\x01 \x01(\x0c\x12\x14\n\x0c\x61rgs_pickles\x18\x02 \x03(\x0c\x12"\n\x0cimage_config\x18\x03 \x01(\x0b\x32\x0c.ImageConfig"&\n\x12InvokeManyResponse\x12\x10\n\x08task_ids\x18\x01 \x03(\t"C\n\x0cStreamResult\x12\r\n\x05index\x18\x01 \x01(\x05\x12\x15\n\rresult_pickle\x18\x02 \x01(\x0c\x12\r\n\x05\x65rror\x18\x03 \x01(\t"#\n\x10GetResultRequest\x12\x0f\n\x07task_id\x18\x01 \x01(\t"9\n\x11GetResultResponse\x12\x15\n\rresult_pickle\x18\x01 \x01(\x0c\x12\r\n\x05\x65rror\x18\x02 \x01(\t2\xda\x01\n\tNanoModal\x12)\n\x06Invoke\x12\x0e.InvokeRequest\x1a\x0f.InvokeResponse\x12\x32\n\tGetResult\x12\x11.GetResultRequest\x1a\x12.GetResultResponse\x12\x35\n\nInvokeMany\x12\x12.InvokeManyRequest\x1a\x13.InvokeManyResponse\x12\x37\n\x10InvokeManyStream\x12\x12.InvokeManyRequest\x1a\r.StreamResult0\x01\x62\x06proto3'
 )
 
 _globals = globals()
@@ -28,20 +28,22 @@ _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "proto.nano_modal_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
     DESCRIPTOR._loaded_options = None
-    _globals["_INVOKEREQUEST"]._serialized_start = 26
-    _globals["_INVOKEREQUEST"]._serialized_end = 87
-    _globals["_INVOKERESPONSE"]._serialized_start = 89
-    _globals["_INVOKERESPONSE"]._serialized_end = 122
-    _globals["_INVOKEMANYREQUEST"]._serialized_start = 124
-    _globals["_INVOKEMANYREQUEST"]._serialized_end = 190
-    _globals["_INVOKEMANYRESPONSE"]._serialized_start = 192
-    _globals["_INVOKEMANYRESPONSE"]._serialized_end = 230
-    _globals["_STREAMRESULT"]._serialized_start = 232
-    _globals["_STREAMRESULT"]._serialized_end = 299
-    _globals["_GETRESULTREQUEST"]._serialized_start = 301
-    _globals["_GETRESULTREQUEST"]._serialized_end = 336
-    _globals["_GETRESULTRESPONSE"]._serialized_start = 338
-    _globals["_GETRESULTRESPONSE"]._serialized_end = 395
-    _globals["_NANOMODAL"]._serialized_start = 398
-    _globals["_NANOMODAL"]._serialized_end = 616
+    _globals["_IMAGECONFIG"]._serialized_start = 26
+    _globals["_IMAGECONFIG"]._serialized_end = 99
+    _globals["_INVOKEREQUEST"]._serialized_start = 101
+    _globals["_INVOKEREQUEST"]._serialized_end = 198
+    _globals["_INVOKERESPONSE"]._serialized_start = 200
+    _globals["_INVOKERESPONSE"]._serialized_end = 233
+    _globals["_INVOKEMANYREQUEST"]._serialized_start = 235
+    _globals["_INVOKEMANYREQUEST"]._serialized_end = 337
+    _globals["_INVOKEMANYRESPONSE"]._serialized_start = 339
+    _globals["_INVOKEMANYRESPONSE"]._serialized_end = 377
+    _globals["_STREAMRESULT"]._serialized_start = 379
+    _globals["_STREAMRESULT"]._serialized_end = 446
+    _globals["_GETRESULTREQUEST"]._serialized_start = 448
+    _globals["_GETRESULTREQUEST"]._serialized_end = 483
+    _globals["_GETRESULTRESPONSE"]._serialized_start = 485
+    _globals["_GETRESULTRESPONSE"]._serialized_end = 542
+    _globals["_NANOMODAL"]._serialized_start = 545
+    _globals["_NANOMODAL"]._serialized_end = 763
 # @@protoc_insertion_point(module_scope)

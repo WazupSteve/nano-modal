@@ -18,7 +18,7 @@ from nano_modal.config import get_redis_url
 redis_client = redis.from_url(get_redis_url())
 
 
-def enqueue_task(fn_bytes, args_bytes):
+def enqueue_task(fn_bytes, args_bytes, image_config=None):
     """
     store in redis queue
     redis list for task queue
@@ -26,7 +26,12 @@ def enqueue_task(fn_bytes, args_bytes):
     """
     task_id = str(uuid.uuid4())
 
-    task = {"task_id": task_id, "fn_bytes": fn_bytes.hex(), "args_bytes": args_bytes.hex()}
+    task = {
+        "task_id": task_id,
+        "fn_bytes": fn_bytes.hex(),
+        "args_bytes": args_bytes.hex(),
+        "image_config": image_config,
+    }
     # convert to json string for redis storage
     task_json = json.dumps(task)
     redis_client.lpush("nano_modal:queue", task_json)

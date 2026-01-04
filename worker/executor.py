@@ -15,9 +15,10 @@ def process_task(task):
     task_id = task["task_id"]
     fn_bytes = task["fn_bytes"]
     args_bytes = task["args_bytes"]
+    image_config = task.get("image_config")
     logging.info("worker executing task %s", task_id)
     try:
-        result_bytes = execute_in_docker(fn_bytes, args_bytes)
+        result_bytes = execute_in_docker(fn_bytes, args_bytes, image_config=image_config)
         store_result(task_id, result_bytes)
     except Exception as exc:
         logging.exception("task %s failed %s", task_id, exc)

@@ -39,6 +39,7 @@ target-version = ["py311"]
 
 [tool.ruff]
 line-length = 100
+exclude = ["proto"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]

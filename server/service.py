@@ -17,13 +17,29 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
     """
 
     def Invoke(self, request, context):
-        task_id = enqueue_task(request.function_pickle, request.args_pickle)
+        image_config = None
+        if request.HasField("image_config"):
+            image_config = {
+                "base_image": request.image_config.base_image,
+                "pip_packages": list(request.image_config.pip_packages),
+                "commands": list(request.image_config.commands),
+            }
+        task_id = enqueue_task(
+            request.function_pickle, request.args_pickle, image_config=image_config
+        )
         return nano_modal_pb2.InvokeResponse(task_id=task_id)
 
     def InvokeMany(self, request, context):
+        image_config = None
+        if request.HasField("image_config"):
+            image_config = {
+                "base_image": request.image_config.base_image,
+                "pip_packages": list(request.image_config.pip_packages),
+                "commands": list(request.image_config.commands),
+            }
         task_ids = []  # list
         for args_bytes in request.args_pickles:
-            tid = enqueue_task(request.function_pickle, args_bytes)
+            tid = enqueue_task(request.function_pickle, args_bytes, image_config=image_config)
             task_ids.append(tid)
         return nano_modal_pb2.InvokeManyResponse(task_ids=task_ids)
 
@@ -35,10 +51,17 @@ class NanoModalServicer(nano_modal_pb2_grpc.NanoModalServicer):
         each "yield" sends a message to the client ( yield instead of return )
         connection stays open untill all results are yielded
         """
+        image_config = None
+        if request.HasField("image_config"):
+            image_config = {
+                "base_image": request.image_config.base_image,
+                "pip_packages": list(request.image_config.pip_packages),
+                "commands": list(request.image_config.commands),
+            }
         # step 1: enqueue tasks and track them with index
         pending = {}  # task_id -> index
         for i, args_bytes in enumerate(request.args_pickles):
-            task_id = enqueue_task(request.function_pickle, args_bytes)
+            task_id = enqueue_task(request.function_pickle, args_bytes, image_config=image_config)
             pending[task_id] = i
 
         # step 2: poll untill all tasks are done
