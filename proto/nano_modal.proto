@@ -3,6 +3,8 @@ syntax = "proto3";
 service NanoModal {
     rpc Invoke(InvokeRequest) returns (InvokeResponse);
     rpc GetResult(GetResultRequest) returns (GetResultResponse);
+    rpc InvokeMany(InvokeManyRequest) returns (InvokeManyResponse);
+    rpc InvokeManyStream(InvokeManyRequest) returns (stream StreamResult);
 }
 
 message InvokeRequest {
@@ -12,6 +14,21 @@ message InvokeRequest {
 
 message InvokeResponse {
     string task_id = 1;
+}
+
+message InvokeManyRequest {
+    bytes function_pickle = 1;
+    repeated bytes args_pickles = 2;
+}
+
+message InvokeManyResponse {
+    repeated string task_ids = 1;
+}
+
+message StreamResult {
+    int32 index = 1;
+    bytes result_pickle = 2;
+    string error = 3;
 }
 
 message GetResultRequest {
