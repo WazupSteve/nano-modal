@@ -202,22 +202,22 @@ nano-modal/
 
 ### Step 2.1: Update `function.py`
 - [x] `map(inputs)` generator
-- [ ] Submit multiple tasks
-- [ ] Collect results in order
-- [ ] Yield results as they complete
+- [x] Submit multiple tasks
+- [x] Collect results in order
+- [x] Yield results as they complete
 
 ---
 
 ### Step 2.2: Update Proto
-- [ ] Add `InvokeMany` RPC
-- [ ] Add `StreamResults` RPC
-- [ ] Regenerate stubs
+- [x] Add `InvokeMany` RPC
+- [x] Add `StreamResults` RPC
+- [x] Regenerate stubs
 
 ---
 
 ### Step 2.3: Update Server
-- [ ] Handle batch invocations
-- [ ] Stream results back
+- [x] Handle batch invocations
+- [x] Stream results back
 
 ---
 
