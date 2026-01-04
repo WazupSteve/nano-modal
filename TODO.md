@@ -178,7 +178,7 @@
 
 ---
 
-## Phase 4: CLI & Polish
+## Phase 4: CLI & Polish 
 
 ### Step 4.1: `cli/main.py`
 - [ ] Use Click framework
