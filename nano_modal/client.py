@@ -66,6 +66,33 @@ def invoke(fxn_bytes, args_bytes, server_address=None, timeout=120):
         channel.close()
 
 
+def invoke_many_stream(fn_bytes, args_pickles, server_address=None, timeout=120):
+    """
+    goal: send multiple tasks and receive streaming results
+    returns : generateor that yields (index,result_bytes) tuples as they arrive
+    """
+    if server_address is None:
+        server_address = get_server_address()
+    channel = get_channel(server_address)
+    stub = nano_modal_pb2_grpc.NanoModalStub(channel)
+
+    try:
+        request = nano_modal_pb2.InvokeManyRequest(
+            function_pickle=fn_bytes, args_pickles=args_pickles
+        )
+        # returns an iterator over StreamResult message
+        response_stream = stub.InvokeManyStream(request, timeout=timeout)
+
+        # yield result as it arrives from the server
+        for response in response_stream:
+            if response.error:
+                yield (response.index, None, response.error)
+            else:
+                yield (response.index, response.result_pickle, None)
+    finally:
+        channel.close()
+
+
 def wait_for_result(task_id, server_address=None, timeout=120):
     """Goal: Poll the server until a specific task_id has a result."""
     if server_address is None:

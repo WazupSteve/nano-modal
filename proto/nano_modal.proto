@@ -4,6 +4,7 @@ service NanoModal {
     rpc Invoke(InvokeRequest) returns (InvokeResponse);
     rpc GetResult(GetResultRequest) returns (GetResultResponse);
     rpc InvokeMany(InvokeManyRequest) returns (InvokeManyResponse);
+    rpc InvokeManyStream(InvokeManyRequest) returns (stream StreamResult);
 }
 
 message InvokeRequest {
@@ -22,6 +23,12 @@ message InvokeManyRequest {
 
 message InvokeManyResponse {
     repeated string task_ids = 1;
+}
+
+message StreamResult {
+    int32 index = 1;
+    bytes result_pickle = 2;
+    string error = 3;
 }
 
 message GetResultRequest {

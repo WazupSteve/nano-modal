@@ -54,6 +54,12 @@ class NanoModalStub(object):
             response_deserializer=proto_dot_nano__modal__pb2.InvokeManyResponse.FromString,
             _registered_method=True,
         )
+        self.InvokeManyStream = channel.unary_stream(
+            "/NanoModal/InvokeManyStream",
+            request_serializer=proto_dot_nano__modal__pb2.InvokeManyRequest.SerializeToString,
+            response_deserializer=proto_dot_nano__modal__pb2.StreamResult.FromString,
+            _registered_method=True,
+        )
 
 
 class NanoModalServicer(object):
@@ -77,6 +83,12 @@ class NanoModalServicer(object):
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
+    def InvokeManyStream(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
+
 
 def add_NanoModalServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -94,6 +106,11 @@ def add_NanoModalServicer_to_server(servicer, server):
             servicer.InvokeMany,
             request_deserializer=proto_dot_nano__modal__pb2.InvokeManyRequest.FromString,
             response_serializer=proto_dot_nano__modal__pb2.InvokeManyResponse.SerializeToString,
+        ),
+        "InvokeManyStream": grpc.unary_stream_rpc_method_handler(
+            servicer.InvokeManyStream,
+            request_deserializer=proto_dot_nano__modal__pb2.InvokeManyRequest.FromString,
+            response_serializer=proto_dot_nano__modal__pb2.StreamResult.SerializeToString,
         ),
     }
     generic_handler = grpc.method_handlers_generic_handler("NanoModal", rpc_method_handlers)
@@ -184,6 +201,36 @@ class NanoModal(object):
             "/NanoModal/InvokeMany",
             proto_dot_nano__modal__pb2.InvokeManyRequest.SerializeToString,
             proto_dot_nano__modal__pb2.InvokeManyResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True,
+        )
+
+    @staticmethod
+    def InvokeManyStream(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            "/NanoModal/InvokeManyStream",
+            proto_dot_nano__modal__pb2.InvokeManyRequest.SerializeToString,
+            proto_dot_nano__modal__pb2.StreamResult.FromString,
             options,
             channel_credentials,
             insecure,
